@@ -1,0 +1,40 @@
+{
+  "measurement": {
+    "action": {
+      "clear": "Xoá",
+      "close": "Đóng",
+      "setting": "Cài đặt",
+      "download": "Tải xuống",
+      "add-point": "Thêm điểm",
+      "fly-to": "Bay tới"
+    },
+    "title": "Công cụ đo đạc",
+    "result": "Kết quả đo lường",
+    "field": {
+      "unit-distance": "Đơn vị độ dài",
+      "unit-area": "Đơn vị diện tích"
+    },
+    "tools": {
+      "point": "Đánh dấu",
+      "distance": "Đo độ dài",
+      "area": "Đo diện tích",
+      "azimuth": "Đo phương vị"
+    },
+    "unit": {
+      "meter": "Mét",
+      "kilometer": "Kilômét",
+      "square-meter": "Mét vuông",
+      "hecta": "Hecta",
+      "square-kilometer": "Kilômét vuông"
+    },
+    "setting": {
+      "title": "Cài đặt",
+      "field": { "data": "Dữ liệu" },
+      "point": "Điểm",
+      "distance": "Chiều dài",
+      "area": "Diện tích",
+      "azimuth": "Góc phương vị"
+    },
+    "no-data": { "text": "Trạng thái", "value": "Đợi..." }
+  }
+}

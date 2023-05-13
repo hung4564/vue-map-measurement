@@ -1,28 +1,58 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Map locale="vi">
+      <MeasurementControl position="top-right" />
+      <BaseMapControl position="bottom-left" />
+      <PrintControl />
+      <GeolocateControl />
+      <HomeControl />
+      <ZoomControl />
+
+      <FullScreenControl />
+      <MouseCoordinatesControl />
+    </Map>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+/* eslint-disable no-unused-vars */
+import {
+  FullScreenControl,
+  MouseCoordinatesControl,
+  ZoomControl,
+  HomeControl,
+  GeolocateControl,
+  BaseMapControl,
+  Map,
+  PrintControl
+} from "@hungpv4564/vue-library-map";
+import "@hungpv4564/vue-library-map/main.css";
+import MeasurementControl from "@/components/MeasurementControl/MeasurementControl";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    FullScreenControl,
+    MouseCoordinatesControl,
+    ZoomControl,
+    HomeControl,
+    GeolocateControl,
+    BaseMapControl,
+    Map,
+    PrintControl,
+    MeasurementControl
+  },
+  methods: {}
+};
 </script>
-
 <style>
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body,
+html,
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
 }
 </style>

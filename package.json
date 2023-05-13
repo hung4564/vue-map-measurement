@@ -1,6 +1,9 @@
 {
   "main": "./dist/map.common.js",
   "name": "@hungpv4564/vue-map-measurement",
+  "exports": {
+    ".": "./dist/map.common.js"
+  },
   "author": {
     "name": "hung.pv"
   },
@@ -17,7 +20,7 @@
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --name map src/index.js",
+    "build": "vue-cli-service build --target lib --name map build/app.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

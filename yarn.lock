@@ -1034,9 +1034,9 @@
     vue-resize-directive "^1.2.0"
 
 "@hungpv4564/vue-library-map@^1.0.16":
-  version "1.0.15"
-  resolved "https://registry.yarnpkg.com/@hungpv4564/vue-library-map/-/vue-library-map-1.0.15.tgz#9e96763af1b1fd99d04a556aeb17882067381b30"
-  integrity sha512-3un0Iu19RNb/TLs1ZjX9pLBrTFHw1pVEaTROtKb2qBleN4f6Ow0gpZH+MkurqutcW6KWekYj1x+FEc1VrVIRfw==
+  version "1.0.16"
+  resolved "https://registry.yarnpkg.com/@hungpv4564/vue-library-map/-/vue-library-map-1.0.16.tgz#ad41f50bd65586cff21d58e9bde07c5d855afd14"
+  integrity sha512-BsSU6WZ5vaJA60Wm/hFUzSDlHUv4LKyCVVSteWh3N9M5Yec/4BkonRnbToILxZPtK2SYR5vGza9GBOQnTJSClw==
   dependencies:
     "@hungpv4564/vue-library-draggable" "^1.0.9"
     "@jamescoyle/vue-icon" "^0.1.2"

@@ -41,7 +41,7 @@
           <SvgIcon :size="18" type="mdi" :path="path.setting" />
         </MapControlButton>
         <MapControlButton
-          :disabled="!coordinates || coordinates.lenght < 1"
+          :disabled="!coordinates || coordinates.length < 1"
           :tooltip="$map.trans('map.measurement.action.fly-to')"
           @click="onFlyTo()"
         >
@@ -82,7 +82,7 @@ import {
   MapControlButton,
   MapControlGroupButton
 } from "@hungpv4564/vue-library-map/mixin";
-import { storeMapLang } from "@hungpv4564/vue-library-map/store";
+import { storeMapLang, storeEvent } from "@hungpv4564/vue-library-map/store";
 import {
   createMapboxImage,
   fitBounds
@@ -113,7 +113,6 @@ import {
 import MeasurementSettingPopup from "./MeasurementSettingPopup.vue";
 import { FormView } from "./helper/_viewForm";
 import { lineString, point, polygon } from "@turf/helpers";
-
 let handler = new MeasurementHandle();
 const DEFAULT_COLOR_HIGHLIGHT = "#004E98";
 export default {
@@ -265,6 +264,24 @@ export default {
           }
         }
       );
+      this.onMapClickBind = this.onMapClick.bind(this);
+      mapView.onStart = () => {
+        if (!this.map) {
+          return;
+        }
+        this.eventClickId = storeEvent.addListenerMap(
+          this.map.id,
+          "click",
+          this.onMapClickBind
+        );
+        addCursorCrosshair(this.map);
+      };
+      mapView.onRestet = () => {
+        if (this.map) removeCursorCrosshair(this.map);
+        if (this.eventClickId) {
+          storeEvent.removeListenerMap(this.map.id, "click", this.eventClickId);
+        }
+      };
       let markerView = new MapMarkerView(this.map);
       markerView.setColor(DEFAULT_COLOR_HIGHLIGHT);
       markerView.onDragMarker = (coordinates) => {
@@ -296,15 +313,12 @@ export default {
       handler.addView(mapView);
       handler.addView(markerView);
       handler.addView(formView);
-      this.onMapClickBind = this.onMapClick.bind(this);
-      this.map.on("click", this.onMapClickBind);
     },
     onDestroy() {
       if (handler) {
         handler.destroy();
       }
       this.clear();
-      if (this.onMapClickBind) this.map.off("click", this.onMapClickBind);
     },
     onMeasureDistance() {
       if (!this.checkMeasureRun("distance")) return;
@@ -333,20 +347,17 @@ export default {
     },
     checkMeasureRun(type) {
       this.reset();
-      removeCursorCrosshair(this.map);
       if (this.measurement_type == type) {
         this.measurement_type = null;
         handler.setAction(null);
         return false;
       }
-      addCursorCrosshair(this.map);
       this.measurement_type = type;
       return true;
     },
     clear() {
       this.reset();
       this.measurement_type = null;
-      if (this.map) removeCursorCrosshair(this.map);
       if (handler) handler.setAction(null);
     },
     reset() {

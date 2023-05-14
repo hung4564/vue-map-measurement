@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Map locale="vi">
+    <Map>
       <MeasurementControl position="top-right" />
       <BaseMapControl position="bottom-left" />
       <PrintControl />

@@ -45,7 +45,7 @@ import {
 } from "@hungpv4564/vue-library-draggable";
 import "@hungpv4564/vue-library-map/map.css";
 import { MeasurementControl } from "@hungpv4564/vue-map-measurement";
-import "@hungpv4564/vue-map-measurement/main.css";
+import "@hungpv4564/vue-map-measurement/index.css";
 
 export default {
   name: "App",

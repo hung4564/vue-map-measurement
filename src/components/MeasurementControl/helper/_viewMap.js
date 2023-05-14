@@ -24,7 +24,11 @@ export class MapView extends View {
     this.layers = layers;
     return this;
   }
-  start() {}
+  start() {
+    if (this.onStart) {
+      this.onStart();
+    }
+  }
   reset() {
     const source = this.map.getSource(this.source.id);
     if (source) {
@@ -32,6 +36,9 @@ export class MapView extends View {
         type: "FeatureCollection",
         features: []
       });
+    }
+    if (this.onRestet) {
+      this.onRestet();
     }
   }
   destroy() {

@@ -13,8 +13,10 @@ function getProdExternals() {
   };
 }
 module.exports = {
+  productionSourceMap: false,
   transpileDependencies: true,
   configureWebpack: {
+    devtool: "source-map",
     resolve: {
       alias: {
         "@components": path.join(__dirname, "src/components/"),

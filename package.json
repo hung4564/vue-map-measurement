@@ -20,7 +20,7 @@
   },
   "bugs": "https://github.com/hung4564/vue-map-measurement/issues",
   "license": "MIT",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "files": [
     "dist/*"
   ],

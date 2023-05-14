@@ -1,15 +1,15 @@
-<h1 align="center">Vue map measurement</h1>
+<h1 align="center">Vue library map</h1>
 
 # Vue library draggable
 
 ## Install
 
 ```
-npm i @hungpv4564/vue-map-measurement
+npm i @hungpv4564/vue-library-map
 ```
 
 ```
-yarn add @hungpv4564/vue-map-measurement
+yarn add @hungpv4564/vue-library-map
 ```
 
 ## Usage
@@ -18,6 +18,7 @@ yarn add @hungpv4564/vue-map-measurement
 <template>
   <div id="app">
     <Map locale="vi">
+      <MeasurementControl position="top-right" />
       <BaseMapControl position="bottom-left" />
       <PrintControl />
       <GeolocateControl />
@@ -42,7 +43,9 @@ import {
   Map,
   PrintControl
 } from "@hungpv4564/vue-library-draggable";
-import "@hungpv4564/vue-library-map/dist/map.css";
+import "@hungpv4564/vue-library-map/map.css";
+import { MeasurementControl } from "@hungpv4564/vue-map-measurement";
+import "@hungpv4564/vue-map-measurement/main.css";
 
 export default {
   name: "App",
@@ -54,7 +57,8 @@ export default {
     GeolocateControl,
     BaseMapControl,
     Map,
-    PrintControl
+    PrintControl,
+    MeasurementControl
   }
 };
 </script>

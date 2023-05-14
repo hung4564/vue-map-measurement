@@ -26,7 +26,6 @@
               </div>
               <div>
                 <button
-                  v-if="$listeners['click:fly-to']"
                   @click="onFlyTo"
                   :disabled="!model || model.lenght < 1"
                   class="setting-button"
@@ -99,6 +98,7 @@
 <script>
 import { DraggablePopup } from "@hungpv4564/vue-library-draggable";
 import { ModuleMixin } from "@hungpv4564/vue-library-map/mixin";
+import { fitBounds } from "@hungpv4564/vue-library-map/helper";
 import {
   mdiCrosshairsGps,
   mdiPlus,
@@ -171,7 +171,7 @@ export default {
 
   methods: {
     onFlyTo() {
-      this.$emit("click:fly-to");
+      fitBounds(this.map, this.convertGeometry(this.model));
     },
     onAddItem() {
       this.model.push([null, null]);

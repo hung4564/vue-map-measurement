@@ -44,7 +44,7 @@ export class MeasureAzimuth extends Measure {
         properties: {
           is_label: true,
           text: `${result.value} °`,
-          rotation: lineBearing - 90
+          rotation: lineBearing
         }
       }
     ];

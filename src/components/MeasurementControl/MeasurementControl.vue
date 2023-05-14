@@ -41,6 +41,13 @@
           <SvgIcon :size="18" type="mdi" :path="path.setting" />
         </MapControlButton>
         <MapControlButton
+          :disabled="!coordinates || coordinates.lenght < 1"
+          :tooltip="$map.trans('map.measurement.action.fly-to')"
+          @click="onFlyTo()"
+        >
+          <SvgIcon :size="18" type="mdi" :path="path.fillBound" />
+        </MapControlButton>
+        <MapControlButton
           :tooltip="$map.trans('map.measurement.action.clear')"
           @click="reset()"
         >
@@ -76,7 +83,10 @@ import {
   MapControlGroupButton
 } from "@hungpv4564/vue-library-map/mixin";
 import { storeMapLang } from "@hungpv4564/vue-library-map/store";
-import { createMapboxImageUrl } from "@hungpv4564/vue-library-map/helper";
+import {
+  createMapboxImage,
+  fitBounds
+} from "@hungpv4564/vue-library-map/helper";
 import enLang from "@/lang/en/map";
 import viLang from "@/lang/vi/map";
 import {
@@ -86,7 +96,8 @@ import {
   mdiMapMarkerOutline,
   mdiDeleteOutline,
   mdiClose,
-  mdiCogOutline
+  mdiCogOutline,
+  mdiCrosshairsGps
 } from "@mdi/js";
 import {
   MeasurementHandle,
@@ -101,6 +112,8 @@ import {
 } from "./helper";
 import MeasurementSettingPopup from "./MeasurementSettingPopup.vue";
 import { FormView } from "./helper/_viewForm";
+import { lineString, point, polygon } from "@turf/helpers";
+
 let handler = new MeasurementHandle();
 const DEFAULT_COLOR_HIGHLIGHT = "#004E98";
 export default {
@@ -122,6 +135,7 @@ export default {
   computed: {
     path() {
       return {
+        fillBound: mdiCrosshairsGps,
         distance: mdiRuler,
         area: mdiRulerSquareCompass,
         azimuth: mdiTableHeadersEye,
@@ -151,23 +165,24 @@ export default {
       }
     },
     onInit() {
-      createMapboxImageUrl(
-        this.map.id,
+      createMapboxImage(
+        this.map,
         "azimuth-arrow",
         require("@/assets/img/arrow.png"),
         { sdf: true }
       );
 
-      createMapboxImageUrl(
-        this.map.id,
+      createMapboxImage(
+        this.map,
         "measurment-round",
         require("@/assets/img/rounded.png"),
         {
-          content: [3, 3, 13, 13],
-          stretchX: [[7, 9]],
-          stretchY: [[7, 9]]
+          content: [4, 4, 12, 12],
+          stretchX: [[6, 10]],
+          stretchY: [[6, 10]]
         }
       );
+
       handler = new MeasurementHandle();
       let mapView = new MapView(this.map);
       mapView.init(
@@ -193,7 +208,7 @@ export default {
             filter: ["has", "rotation"],
             paint: { "icon-color": DEFAULT_COLOR_HIGHLIGHT },
             layout: {
-              "icon-size": 0.08,
+              "icon-size": 1.2,
               "icon-rotate": {
                 type: "identity",
                 property: "rotation"
@@ -342,6 +357,21 @@ export default {
     },
     toggleSetting() {
       this.setting.show = !this.setting.show;
+    },
+    onFlyTo() {
+      fitBounds(this.map, this.convertGeometry(this.coordinates));
+    },
+    convertGeometry(coordinates) {
+      if (coordinates.length == 0) {
+        return;
+      }
+      if (coordinates.length == 1) {
+        return point(coordinates[0]);
+      }
+      if (coordinates.length == 2) {
+        return lineString(coordinates);
+      }
+      return polygon([[...coordinates, coordinates[0]]]);
     }
   }
 };

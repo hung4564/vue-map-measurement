@@ -1033,10 +1033,10 @@
     vue-material-design-icons "^5.2.0"
     vue-resize-directive "^1.2.0"
 
-"@hungpv4564/vue-library-map@^1.0.16":
-  version "1.0.16"
-  resolved "https://registry.yarnpkg.com/@hungpv4564/vue-library-map/-/vue-library-map-1.0.16.tgz#ad41f50bd65586cff21d58e9bde07c5d855afd14"
-  integrity sha512-BsSU6WZ5vaJA60Wm/hFUzSDlHUv4LKyCVVSteWh3N9M5Yec/4BkonRnbToILxZPtK2SYR5vGza9GBOQnTJSClw==
+"@hungpv4564/vue-library-map@^1.0.17":
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@hungpv4564/vue-library-map/-/vue-library-map-1.0.17.tgz#0ba671bebf00476a11000907bde3163955a575ec"
+  integrity sha512-t5FJSFamktor1bFw1IA5Sl/EZ6PVjQXvYG/vtg+vgWkEjl5jq9qGrtOBtDhGY1yV+hZeJxT7rYI6VrJZf00qUA==
   dependencies:
     "@hungpv4564/vue-library-draggable" "^1.0.9"
     "@jamescoyle/vue-icon" "^0.1.2"

@@ -46,24 +46,25 @@ export class MapMarkerView extends View {
       if (!marker) {
         marker = getMarkerNode({ color: this.color, draggable });
         this.markers[index] = marker;
-        if (draggable) {
-          marker.on(
-            "dragend",
-            this.bindOnDragMaker.bind(this, marker, index, coordinates)
-          );
-        }
-        if (this.bindOnRighClickMarker) {
-          marker
-            .getElement()
-            .addEventListener(
-              "contextmenu",
-              this.bindOnRighClickMarker.bind(this, marker, index, coordinates)
-            );
-        }
       }
       marker
         .setLngLat({ lng: coordinate[0], lat: coordinate[1] })
         .addTo(this.map);
+      if (draggable) {
+        marker.off("dragend", this.bindOnDragMaker);
+        marker.on(
+          "dragend",
+          this.bindOnDragMaker.bind(this, marker, index, coordinates)
+        );
+      }
+      let element = marker.getElement();
+      if (this.bindOnRighClickMarker) {
+        element.removeEventListener("contextmenu", this.bindOnRighClickMarker);
+        element.addEventListener(
+          "contextmenu",
+          this.bindOnRighClickMarker.bind(this, marker, index, coordinates)
+        );
+      }
     });
   }
   reset() {

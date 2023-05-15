@@ -5,15 +5,13 @@ export class MapMarkerView extends View {
   constructor(map) {
     super();
     this.map = map;
-    this.marker_cache = {};
-    this.marker_ids = [];
+    this.markers = [];
   }
   setColor(color) {
     this.color = color;
     return this;
   }
   view({ coordinates = [] } = {}) {
-    let marker_has = {};
     let draggable = !!this.onDragMarker;
     if (this.onDragMarker && !this.bindOnDragMaker) {
       this.bindOnDragMaker = function (marker, index, coordinates) {
@@ -24,42 +22,55 @@ export class MapMarkerView extends View {
         this.onDragMarker(new_coordinates, new_coordinate, index, marker);
       };
     }
+    if (this.onRighClickMarker && !this.bindOnRighClickMarker) {
+      this.bindOnRighClickMarker = function (marker, index, coordinates) {
+        const lngLat = marker.getLngLat();
+        this.onRighClickMarker(
+          coordinates,
+          [lngLat.lng, lngLat.lat],
+          index,
+          marker
+        );
+      };
+    }
+    let marker_remove = this.markers.slice(coordinates.length - 1);
+    this.markers = this.markers.slice(0, coordinates.length - 1);
+    marker_remove.forEach((m) => {
+      m.remove();
+    });
     coordinates.forEach((coordinate, index) => {
       if (!coordinate[0] || !coordinate[1]) {
         return;
       }
-      let key = `${coordinate[0]}-${coordinate[1]}`;
-      let marker = this.marker_cache[key];
+      let marker = this.markers[index];
       if (!marker) {
-        marker = getMarkerNode({ color: this.color, draggable })
-          .setLngLat({ lng: coordinate[0], lat: coordinate[1] })
-          .addTo(this.map);
-        this.marker_cache[key] = marker;
-      } else {
-        marker.off("dragend", this.bindOnDragMaker);
+        marker = getMarkerNode({ color: this.color, draggable });
+        this.markers[index] = marker;
+        if (draggable) {
+          marker.on(
+            "dragend",
+            this.bindOnDragMaker.bind(this, marker, index, coordinates)
+          );
+        }
+        if (this.bindOnRighClickMarker) {
+          marker
+            .getElement()
+            .addEventListener(
+              "contextmenu",
+              this.bindOnRighClickMarker.bind(this, marker, index, coordinates)
+            );
+        }
       }
-      if (draggable) {
-        marker.on(
-          "dragend",
-          this.bindOnDragMaker.bind(this, marker, index, coordinates)
-        );
-      }
-      marker_has[key] = true;
-    });
-    Object.keys(this.marker_cache).forEach((key) => {
-      let m = this.marker_cache[key];
-      if (!marker_has[key]) {
-        m.remove();
-        delete this.marker_cache[key];
-      }
+      marker
+        .setLngLat({ lng: coordinate[0], lat: coordinate[1] })
+        .addTo(this.map);
     });
   }
   reset() {
-    Object.keys(this.marker_cache).forEach((key) => {
-      let m = this.marker_cache[key];
+    this.markers.forEach((m) => {
       m.remove();
     });
-    this.marker_cache = {};
+    this.markers = [];
   }
   destroy() {
     this.reset();

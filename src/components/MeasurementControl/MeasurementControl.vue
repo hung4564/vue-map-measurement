@@ -288,6 +288,11 @@ export default {
         handler.init(coordinates);
       };
 
+      markerView.onRighClickMarker = (coordinates, _, index) => {
+        coordinates.splice(index, 1);
+        handler.init(coordinates);
+      };
+
       let formView = new FormView();
       formView.onChangeValue = (coordinates) => {
         this.coordinates = coordinates;

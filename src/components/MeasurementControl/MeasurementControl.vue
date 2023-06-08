@@ -81,12 +81,9 @@ import {
   ModuleMixin,
   MapControlButton,
   MapControlGroupButton
-} from "@hungpv4564/vue-library-map/mixin";
-import { storeMapLang, storeEvent } from "@hungpv4564/vue-library-map/store";
-import {
-  createMapboxImage,
-  fitBounds
-} from "@hungpv4564/vue-library-map/helper";
+} from "@hungpv97/vue-library-map/mixin";
+import { storeMapLang, storeEvent } from "@hungpv97/vue-library-map/store";
+import { createMapboxImage, fitBounds } from "@hungpv97/vue-library-map/helper";
 import enLang from "@/lang/en/map";
 import viLang from "@/lang/vi/map";
 import {

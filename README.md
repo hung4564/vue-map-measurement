@@ -5,11 +5,11 @@
 ## Install
 
 ```
-npm i @hungpv4564/vue-library-map
+npm i @hungpv97/vue-library-map
 ```
 
 ```
-yarn add @hungpv4564/vue-library-map
+yarn add @hungpv97/vue-library-map
 ```
 
 ## Usage
@@ -42,10 +42,10 @@ import {
   BaseMapControl,
   Map,
   PrintControl
-} from "@hungpv4564/vue-library-draggable";
-import "@hungpv4564/vue-library-map/map.css";
-import { MeasurementControl } from "@hungpv4564/vue-map-measurement";
-import "@hungpv4564/vue-map-measurement/index.css";
+} from "@hungpv97/vue-library-draggable";
+import "@hungpv97/vue-library-map/map.css";
+import { MeasurementControl } from "@hungpv97/vue-map-measurement";
+import "@hungpv97/vue-map-measurement/index.css";
 
 export default {
   name: "App",

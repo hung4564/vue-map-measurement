@@ -1,31 +1,23 @@
 import { Reader } from "@models/GeoJsonIO/Reader/Reader";
 import gjv from "geojson-validation";
 
-import { SHAPE_TYPE } from "@/constant/_type";
-export async function validateSimpleFileGeojson(
-  file,
-  fun_show_error = () => {},
-  options = {}
-) {
+export async function validateSimpleFileGeojson(file, options = {}) {
   let { max_size = 1 } = options;
   if (!file) {
-    fun_show_error("Tập tin không tồn tại");
-    return;
+    throw new Error("Tập tin không tồn tại");
   }
   const fileSize = file.size / 1024 / 1024; // in MiB
   if (fileSize > max_size) {
-    fun_show_error("Tập tin không được lớn hơn " + max_size + " MB");
-    return;
+    throw new Error("Tập tin không được lớn hơn " + max_size + " MB");
   }
   if (!validate_fileupload(file.name)) {
-    fun_show_error("Tập tin không đúng định dạng");
-    return;
+    throw new Error("Tập tin không đúng định dạng");
   }
   let geojson = await new Reader().read(file).catch(() => {
-    fun_show_error("Tập tin không đọc được hoặc không đúng định dạng");
+    throw new Error("Tập tin không đọc được hoặc không đúng định dạng");
   });
   if (!gjv.valid(geojson)) {
-    fun_show_error("Tập tin không đúng định dạng GeoJSON");
+    throw new Error("Tập tin không đúng định dạng GeoJSON");
   }
   return geojson;
 }
@@ -46,18 +38,6 @@ export function vallidatePolygonGeojson(geojson) {
     feature = null;
   }
   return feature;
-}
-export function vallidateGeojson(geojson, type) {
-  switch (type) {
-    case SHAPE_TYPE.AREA:
-      return vallidatePolygonGeojson(geojson);
-    case SHAPE_TYPE.LINE:
-      return vallidateLineStringGeojson(geojson);
-    case SHAPE_TYPE.POINT:
-      return vallidatePointGeojson(geojson);
-    default:
-      return vallidatePolygonGeojson(geojson);
-  }
 }
 export function vallidatePointGeojson(geojson) {
   let feature = null;

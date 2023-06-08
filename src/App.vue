@@ -25,8 +25,8 @@ import {
   BaseMapControl,
   Map,
   PrintControl
-} from "@hungpv4564/vue-library-map";
-import "@hungpv4564/vue-library-map/main.css";
+} from "@hungpv97/vue-library-map";
+import "@hungpv97/vue-library-map/main.css";
 import MeasurementControl from "@/components/MeasurementControl/MeasurementControl";
 export default {
   name: "App",

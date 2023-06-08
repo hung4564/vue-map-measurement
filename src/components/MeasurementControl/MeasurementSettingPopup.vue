@@ -96,9 +96,9 @@
 </template>
 
 <script>
-import { DraggablePopup } from "@hungpv4564/vue-library-draggable";
-import { ModuleMixin } from "@hungpv4564/vue-library-map/mixin";
-import { fitBounds } from "@hungpv4564/vue-library-map/helper";
+import { DraggablePopup } from "@hungpv97/vue-library-draggable";
+import { ModuleMixin } from "@hungpv97/vue-library-map/mixin";
+import { fitBounds } from "@hungpv97/vue-library-map/helper";
 import {
   mdiCrosshairsGps,
   mdiPlus,

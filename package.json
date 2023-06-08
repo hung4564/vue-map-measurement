@@ -1,6 +1,6 @@
 {
   "main": "./dist/map.common.js",
-  "name": "@hungpv4564/vue-map-measurement",
+  "name": "@hungpv97/vue-map-measurement",
   "exports": {
     ".": "./dist/map.common.js",
     "./*": "./dist/*",
@@ -30,13 +30,14 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@hungpv4564/vue-library-draggable": "^1.0.9",
-    "@hungpv4564/vue-library-map": "^1.0.17",
+    "@hungpv97/vue-library-draggable": "^1.0.0",
+    "@hungpv97/vue-library-map": "^0.0.1",
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^7.2.96",
     "@turf/turf": "^6.5.0",
     "core-js": "^3.8.3",
     "file-saver": "^2.0.5",
+    "geojson-validation": "^1.0.2",
     "mapbox-gl": "1.13.0",
     "vue": "^2.7.14"
   },
